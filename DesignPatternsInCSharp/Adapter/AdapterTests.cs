@@ -11,9 +11,7 @@ namespace DesignPatternsInCSharp.Adapter
             var swAdapter = new StarWarsApiPeopleAdapter();
             var service = new StarWarsCharacterDisplayService(swAdapter);
 
-            var result = await service.ListCharacters();
-
-            Assert.NotNull(result);
+            await CallListCharactersAndAssertContainsExpectedCharacters(service);
         }
 
         [Fact]
@@ -22,9 +20,24 @@ namespace DesignPatternsInCSharp.Adapter
             var localAdapter = new LocalFilePeopleAdapter();
             var service = new StarWarsCharacterDisplayService(localAdapter);
 
+            await CallListCharactersAndAssertContainsExpectedCharacters(service);
+        }
+
+        [Fact]
+        public async Task ListCharactersGivenThirdPartyApiAdapterShouldReturnSomething()
+        {
+            var adapter = new ThirdPartyApiAdapter();
+            var service = new StarWarsCharacterDisplayService(adapter);
+
+            await CallListCharactersAndAssertContainsExpectedCharacters(service);
+        }
+
+        private static async Task CallListCharactersAndAssertContainsExpectedCharacters(StarWarsCharacterDisplayService service)
+        {
             var result = await service.ListCharacters();
 
-            Assert.NotNull(result);
+            Assert.Contains("Luke Skywalker", result);
+            Assert.Contains("Darth Vader", result);
         }
     }
 }
