@@ -9,7 +9,7 @@ namespace DesignPatternsInCSharp.Adapter
     {
         public override async Task<List<Person>> GetPeople()
         {
-            string filePath = @"C:\dev\GitHub\DesignPatternsInCSharp\DesignPatternsInCSharp\Adapter\People.json";
+            string filePath = @"Adapter/People.json";
             return JsonConvert.DeserializeObject<List<Person>>(await File.ReadAllTextAsync(filePath));
         }
     }
