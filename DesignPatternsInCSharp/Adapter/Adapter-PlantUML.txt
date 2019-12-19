@@ -1,0 +1,24 @@
+@startuml
+
+title Class Adapter
+
+class Client
+
+interface IAdapter {
+  +void SomeMethod()
+}
+
+class SpecificAdapter {
+  +void SomeMethod()
+}
+
+class Adaptee {
+  +void IncompatibleMethod()
+}
+
+IAdapter <|-left- Client: Calls
+IAdapter <|-down- SpecificAdapter: Implements
+SpecificAdapter -right-|> Adaptee: Calls
+
+
+@enduml
