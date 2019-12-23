@@ -1,10 +1,10 @@
 ﻿namespace DesignPatternsInCSharp.Adapter
 {
-    public class Person
-    {
-        public string Name { get; set;  }
-        public string Gender { get; set; }
-        [Newtonsoft.Json.JsonProperty("hair_color")]
-        public string HairColor { get; set; }
-    }
+public class Person
+{
+    public virtual string Name { get; set;  }
+    public virtual string Gender { get; set; }
+    [Newtonsoft.Json.JsonProperty("hair_color")]
+    public virtual string HairColor { get; set; }
+}
 }
