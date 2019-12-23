@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
+namespace DesignPatternsInCSharp.Adapter.AdapterIntroduction
 {
     public class StarWarsApi
     {
@@ -17,6 +17,16 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
 
                 return people;
             }
+        }
+    }
+
+    public class StarWarsApiCharacterSourceAdapter : ICharacterSourceAdapter
+    {
+        private StarWarsApi _starWarsApi = new StarWarsApi();
+
+        public async Task<IEnumerable<Person>> GetCharacters()
+        {
+            return await _starWarsApi.GetCharacters();
         }
     }
 }

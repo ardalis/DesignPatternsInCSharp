@@ -31,7 +31,8 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviders
                     string result = await client.GetStringAsync(url);
                     people = JsonConvert.DeserializeObject<ApiResult<Person>>(result).Results;
                 }
-            } else
+            } 
+            else
             {
                 throw new Exception("Invalid character source");
             }

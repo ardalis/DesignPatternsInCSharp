@@ -3,33 +3,29 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
+namespace DesignPatternsInCSharp.Adapter.AdapterIntroduction
 {
     public class StarWarsCharacterDisplayService
     {
-        public enum CharacterSource
-        {
-            File,
-            Api
-        }
         public async Task<string> ListCharacters(CharacterSource source)
         {
-            List<Person> people;
+            ICharacterSourceAdapter characterSource;
             if (source == CharacterSource.File)
             {
                 string filePath = @"Adapter/People.json";
-                var characterSource = new CharacterFileSource();
-                people = await characterSource.GetCharactersFromFile(filePath);
+                characterSource = new CharacterFileSourceAdapter(filePath);
             } 
             else if (source == CharacterSource.Api)
             {
-                var swapiSource = new StarWarsApi();
-                people = await swapiSource.GetCharacters();
+                characterSource = new StarWarsApiCharacterSourceAdapter();
             }
             else
             {
                 throw new Exception("Invalid character source");
             }
+            
+            var people = await characterSource.GetCharacters();
+
             var sb = new StringBuilder();
             int nameWidth = 30;
             sb.AppendLine($"{"NAME".PadRight(nameWidth)}   {"HAIR"}");

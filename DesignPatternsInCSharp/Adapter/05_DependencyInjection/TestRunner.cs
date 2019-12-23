@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Abstractions;
 
-namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
+namespace DesignPatternsInCSharp.Adapter.DependencyInjection
 {
     public class TestRunner
     {
@@ -16,9 +16,11 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
         [Fact]
         public async Task DisplayCharactersFromFile()
         {
-            var service = new StarWarsCharacterDisplayService();
+            string filename = @"Adapter/People.json";
+            var service = new StarWarsCharacterDisplayService(
+                new CharacterFileSourceAdapter(filename, new CharacterFileSource()));
 
-            var result = await service.ListCharacters(StarWarsCharacterDisplayService.CharacterSource.File);
+            var result = await service.ListCharacters();
 
             _output.WriteLine(result);
         }
@@ -26,9 +28,10 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
         [Fact]
         public async Task DisplayCharactersFromApi()
         {
-            var service = new StarWarsCharacterDisplayService();
+            var service = new StarWarsCharacterDisplayService(
+                new StarWarsApiCharacterSourceAdapter(new StarWarsApi()));
 
-            var result = await service.ListCharacters(StarWarsCharacterDisplayService.CharacterSource.Api);
+            var result = await service.ListCharacters();
 
             _output.WriteLine(result);
         }
