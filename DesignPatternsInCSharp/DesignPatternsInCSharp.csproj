@@ -26,4 +26,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Proxy\SmartProxy\" />
+    <Folder Include="Proxy\RemoteProxy\" />
+    <Folder Include="Proxy\VirtualProxy\" />
+  </ItemGroup>
+
 </Project>
