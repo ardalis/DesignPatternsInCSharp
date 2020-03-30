@@ -21,9 +21,14 @@ namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy
         public IEnumerable<string> Tags { get; private set; }
         public string Content { get; private set; }
         public DateTime DateCreated { get; private set; } = DateTime.UtcNow;
-        public DateTime DateReviewed { get; private set; }
+        public DateTime? DateReviewed { get; private set; }
 
-        public virtual void UpdateName(string newName, User user)
+        internal virtual void CompleteReview(User editor)
+        {
+            DateReviewed = DateTime.UtcNow;
+        }
+
+        internal virtual void UpdateName(string newName, User user)
         {
             Name = newName;
         }

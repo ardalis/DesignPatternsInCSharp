@@ -1,17 +1,19 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy.Tests
 {
-    public class UserAddDocument
+    public class EditorReviewDocument
     {
         [Fact]
-        public void AddsDocumentToAuthoredDocuments()
+        public void SetsDateReviewedToCurrentDateTime()
         {
-            var author = new User { Role = Roles.Author };
+            var editor = new User { Role = Roles.Editor };
+            var document = Document.CreateDocument("test name", "test content");
 
-            author.AddDocument("test name", "test content");
+            document.CompleteReview(editor);
 
-            Assert.Contains(author.AuthoredDocuments, doc => doc.Name == "test name");
+            Assert.True(DateTime.UtcNow - document.DateReviewed < TimeSpan.FromMilliseconds(500));
         }
     }
 
