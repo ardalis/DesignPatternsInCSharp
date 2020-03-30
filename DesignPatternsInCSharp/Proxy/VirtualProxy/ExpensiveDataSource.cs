@@ -4,7 +4,7 @@ namespace DesignPatternsInCSharp.Proxy.VirtualProxy
 {
     public static class ExpensiveDataSource
     {
-        public static List<ExpensiveEntity> GetEntities(ExpensiveToFullyLoad owner)
+        public static List<ExpensiveEntity> GetEntities(BaseClassWithHistory owner)
         {
             var list = new List<ExpensiveEntity>();
             for (int i = 0; i < 10; i++)
