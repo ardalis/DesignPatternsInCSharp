@@ -9,7 +9,7 @@ namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy.Tests
         public void UpdatesNameGivenUserInAuthorRole()
         {
             var author = new User { Role = Roles.Author };
-            var document = new Document("test name", "test content");
+            var document = Document.CreateDocument("test name", "test content");
 
             document.UpdateName("new name", author);
 

@@ -10,7 +10,7 @@ namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy
 
         public void AddDocument(string documentName, string documentContent)
         {
-            var document = new Document (documentName,documentContent);
+            var document = Document.CreateDocument(documentName,documentContent);
             AuthoredDocuments.Add(document);
         }
     }

@@ -5,7 +5,12 @@ namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy
 {
     public class Document
     {
-        public Document(string name, string content)
+        public static Document CreateDocument(string name, string content)
+        {
+            return new ProtectedDocument(name, content);
+        }
+
+        protected Document(string name, string content)
         {
             Name = name;
             Content = content;
