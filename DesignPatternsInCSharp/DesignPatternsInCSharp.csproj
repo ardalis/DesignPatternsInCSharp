@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Proxy\SmartProxy\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Protobuf Include="..\GreeterService\Protos\greet.proto" GrpcServices="Client">
       <Link>Protos\greet.proto</Link>
     </Protobuf>
