@@ -10,7 +10,7 @@ namespace DesignPatternsInCSharp.Proxy.VirtualProxy
             {
                 if(base.AwayEntities == null)
                 {
-                    base.AwayEntities = new List<ExpensiveEntity>(ExpensiveDataSource.GetEntities(this));
+                    base.AwayEntities = ExpensiveDataSource.GetEntities(this);
                 }
                 return base.AwayEntities;
             }
@@ -23,7 +23,7 @@ namespace DesignPatternsInCSharp.Proxy.VirtualProxy
             {
                 if (base.HomeEntities == null)
                 {
-                    base.HomeEntities = new List<ExpensiveEntity>(ExpensiveDataSource.GetEntities(this));
+                    base.HomeEntities = ExpensiveDataSource.GetEntities(this);
                 }
                 return base.HomeEntities;
             }
