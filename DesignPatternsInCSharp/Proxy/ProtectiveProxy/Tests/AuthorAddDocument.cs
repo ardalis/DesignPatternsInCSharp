@@ -4,7 +4,6 @@ namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy.Tests
 {
     public class AuthorAddDocument
     {
-
         [Fact]
         public void AddsDocumentToAuthoredDocuments()
         {

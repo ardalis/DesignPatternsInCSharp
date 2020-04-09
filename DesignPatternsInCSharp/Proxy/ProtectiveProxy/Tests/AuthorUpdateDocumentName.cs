@@ -3,7 +3,7 @@ using Xunit;
 
 namespace DesignPatternsInCSharp.Proxy.ProtectiveProxy.Tests
 {
-    public class DocumentUpdateName
+    public class AuthorUpdateDocumentName
     {
         [Fact]
         public void UpdatesNameGivenUserInAuthorRole()

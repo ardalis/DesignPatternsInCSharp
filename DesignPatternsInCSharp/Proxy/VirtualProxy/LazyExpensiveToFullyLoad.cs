@@ -7,10 +7,10 @@ namespace DesignPatternsInCSharp.Proxy.VirtualProxy
     public class LazyExpensiveToFullyLoad : BaseClassWithHistory
     {
         private Lazy<IEnumerable<ExpensiveEntity>> _homeEntities;
-        public virtual IEnumerable<ExpensiveEntity> HomeEntities { get { return _homeEntities.Value; } }
+        public IEnumerable<ExpensiveEntity> HomeEntities { get { return _homeEntities.Value; } }
 
         private Lazy<IEnumerable<ExpensiveEntity>> _awayEntities;
-        public virtual IEnumerable<ExpensiveEntity> AwayEntities { get { return _awayEntities.Value; } }
+        public IEnumerable<ExpensiveEntity> AwayEntities { get { return _awayEntities.Value; } }
 
         public LazyExpensiveToFullyLoad()
         {
