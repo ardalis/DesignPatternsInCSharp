@@ -1,10 +1,18 @@
 ﻿using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DesignPatternsInCSharp.Singleton.v1
 {
+    [CollectionDefinition("one", DisableParallelization = true)]
     public class SingletonInstance
     {
+        private readonly ITestOutputHelper _output;
+        public SingletonInstance(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public void ReturnsNonNullSingletonInstance()
         {
@@ -12,6 +20,16 @@ namespace DesignPatternsInCSharp.Singleton.v1
 
             Assert.NotNull(result);
             Assert.IsType<Singleton>(result);
+        }
+    }
+
+    [CollectionDefinition("two", DisableParallelization = true)]
+    public class SingletonInstance2
+    {
+        private readonly ITestOutputHelper _output;
+        public SingletonInstance2(ITestOutputHelper output)
+        {
+            _output = output;
         }
 
         [Fact]
@@ -26,6 +44,7 @@ namespace DesignPatternsInCSharp.Singleton.v1
             Assert.Equal(1, log.Count(log => log.Contains("Constructor")));
             Assert.Equal(3, log.Count(log => log.Contains("Instance")));
 
+            Logger.Output().ToList().ForEach(h => _output.WriteLine(h));
         }
     }
 }

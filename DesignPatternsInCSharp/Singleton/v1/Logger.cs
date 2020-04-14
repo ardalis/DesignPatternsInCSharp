@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DesignPatternsInCSharp.Singleton.v1
 {
     public static class Logger
     {
         private static List<string> _log = new List<string>();
+        public static int DelayMilliseconds { get; set; } = 0;
 
         public static void Log(string message)
         {
+            System.Threading.Thread.Sleep(DelayMilliseconds);
             _log.Add(message);
         }
 
@@ -23,9 +24,9 @@ namespace DesignPatternsInCSharp.Singleton.v1
             return string.Join(Environment.NewLine, _log);
         }
 
-        public static IEnumerable<string> Output()
+        public static List<string> Output()
         {
-            return _log.AsEnumerable();
+            return _log;
         }
     }
 }
