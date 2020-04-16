@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace DesignPatternsInCSharp.Singleton.v2
+namespace DesignPatternsInCSharp.Singleton
 {
     public static class Logger
     {
-        private static List<string> _log = new List<string>();
+        private static ConcurrentQueue<string> _log = new ConcurrentQueue<string>();
         public static int DelayMilliseconds { get; set; } = 0;
 
         public static void Log(string message)
         {
             System.Threading.Thread.Sleep(DelayMilliseconds);
-            _log.Add(message);
+            _log.Enqueue(message);
         }
 
         public static void Clear()
@@ -26,7 +28,7 @@ namespace DesignPatternsInCSharp.Singleton.v2
 
         public static List<string> Output()
         {
-            return _log;
+            return _log.ToList();
         }
     }
 }

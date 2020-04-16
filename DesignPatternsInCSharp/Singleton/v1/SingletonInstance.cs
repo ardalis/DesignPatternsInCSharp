@@ -13,14 +13,14 @@ namespace DesignPatternsInCSharp.Singleton.v1
         public SingletonInstance(ITestOutputHelper output)
         {
             _output = output;
-            SingletonTestHelpers.Reset();
+            SingletonTestHelpers.Reset(typeof(Singleton));
             Logger.Clear();
         }
 
         [Fact]
         public void ReturnsNonNullSingletonInstance()
         {
-            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance());
+            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance<Singleton>());
 
             var result = Singleton.Instance;
 
@@ -33,7 +33,7 @@ namespace DesignPatternsInCSharp.Singleton.v1
         [Fact]
         public void OnlyCallsConstructorOnceGivenThreeInstanceCalls()
         {
-            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance());
+            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance<Singleton>());
 
             var one = Singleton.Instance;
             var two = Singleton.Instance;
@@ -49,7 +49,7 @@ namespace DesignPatternsInCSharp.Singleton.v1
         [Fact]
         public void CallsConstructorMultipleTimesGivenThreeParallelInstanceCalls()
         {
-            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance());
+            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance<Singleton>());
 
             // configure logger to slow down the creation long enough to cause problems
             Logger.DelayMilliseconds = 50;

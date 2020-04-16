@@ -8,7 +8,7 @@ namespace DesignPatternsInCSharp.Proxy.RemoteProxy
     // The remote proxy code is generated at build time and found in the /obj/Debug folder
     public class GreeterTests
     {
-        [Fact]
+        // [Fact] 
         public async Task GreetReturnsResponseAsync()
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");

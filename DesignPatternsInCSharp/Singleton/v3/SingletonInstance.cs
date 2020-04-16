@@ -3,7 +3,7 @@ using System.Threading;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace DesignPatternsInCSharp.Singleton.v2
+namespace DesignPatternsInCSharp.Singleton.v3
 {
     public class SingletonInstance
     {

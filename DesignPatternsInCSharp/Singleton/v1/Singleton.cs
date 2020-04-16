@@ -1,5 +1,6 @@
 ﻿namespace DesignPatternsInCSharp.Singleton.v1
 {
+    // Bad code
     public sealed class Singleton
     {
         private static Singleton _instance;

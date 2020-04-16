@@ -1,4 +1,4 @@
-﻿namespace DesignPatternsInCSharp.Singleton.v2
+﻿namespace DesignPatternsInCSharp.Singleton.v3
 {
     // Bad code
     // Source: https://csharpindepth.com/articles/singleton
@@ -12,14 +12,17 @@
             get
             {
                 Logger.Log("Instance called.");
-                lock (padlock) // this lock is used on *every* reference to Singleton
+                if (_instance == null) // only get a lock if the instance is null
                 {
-                    if (_instance == null)
+                    lock (padlock)
                     {
-                        _instance = new Singleton();
+                        if (_instance == null)
+                        {
+                            _instance = new Singleton();
+                        }
                     }
-                    return _instance;
                 }
+                return _instance;
             }
         }
 
