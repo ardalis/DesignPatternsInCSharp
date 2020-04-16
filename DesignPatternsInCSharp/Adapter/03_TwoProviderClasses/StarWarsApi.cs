@@ -11,7 +11,7 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviderClasses
         {
             using (var client = new HttpClient())
             {
-                string url = "https://swapi.co/api/people";
+                string url = ApiConstants.SWAPI_PEOPLE_ENDPOINT;
                 string result = await client.GetStringAsync(url);
                 var people = JsonConvert.DeserializeObject<ApiResult<Person>>(result).Results;
 

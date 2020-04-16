@@ -8,7 +8,7 @@
     "eye_color": "blue",
     "birth_year": "19BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/"
+    "homeworld": "https://swapi.dev/api/planets/1/"
   },
   {
     "name": "C-3PO",
@@ -19,7 +19,7 @@
     "eye_color": "yellow",
     "birth_year": "112BBY",
     "gender": "n/a",
-    "homeworld": "https://swapi.co/api/planets/1/"
+    "homeworld": "https://swapi.dev/api/planets/1/"
   },
   {
     "name": "R2-D2",
@@ -30,7 +30,7 @@
     "eye_color": "red",
     "birth_year": "33BBY",
     "gender": "n/a",
-    "homeworld": "https://swapi.co/api/planets/8/"
+    "homeworld": "https://swapi.dev/api/planets/8/"
   },
   {
     "name": "Darth Vader",
@@ -41,7 +41,7 @@
     "eye_color": "yellow",
     "birth_year": "41.9BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/"
+    "homeworld": "https://swapi.dev/api/planets/1/"
   },
   {
     "name": "Leia Organa",
@@ -52,6 +52,6 @@
     "eye_color": "brown",
     "birth_year": "19BBY",
     "gender": "female",
-    "homeworld": "https://swapi.co/api/planets/2/"
+    "homeworld": "https://swapi.dev/api/planets/2/"
   }
 ]

@@ -13,7 +13,7 @@ namespace DesignPatternsInCSharp.Adapter.ThirdPartyApi
 
             using (var client = new HttpClient())
             {
-                string url = "https://swapi.co/api/people";
+                string url = ApiConstants.SWAPI_PEOPLE_ENDPOINT;
                 string result = await client.GetStringAsync(url);
                 people = JsonConvert.DeserializeObject<PersonDTOApiResult>(result).Results;
             }
