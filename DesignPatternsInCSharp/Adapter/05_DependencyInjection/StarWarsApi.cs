@@ -11,26 +11,12 @@ namespace DesignPatternsInCSharp.Adapter.DependencyInjection
         {
             using (var client = new HttpClient())
             {
-                string url = "https://swapi.co/api/people";
+                string url = ApiConstants.SWAPI_PEOPLE_ENDPOINT;
                 string result = await client.GetStringAsync(url);
                 var people = JsonConvert.DeserializeObject<ApiResult<Person>>(result).Results;
 
                 return people;
             }
-        }
-    }
-
-    public class StarWarsApiCharacterSourceAdapter : ICharacterSourceAdapter
-    {
-        private StarWarsApi _starWarsApi;
-        public StarWarsApiCharacterSourceAdapter(StarWarsApi starWarsApi)
-        {
-            _starWarsApi = starWarsApi;
-        }
-
-        public async Task<IEnumerable<Person>> GetCharacters()
-        {
-            return await _starWarsApi.GetCharacters();
         }
     }
 }

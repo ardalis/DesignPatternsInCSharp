@@ -15,6 +15,7 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviders
             File,
             Api
         }
+
         public async Task<string> ListCharacters(CharacterSource source)
         {
             List<Person> people;
@@ -25,9 +26,12 @@ namespace DesignPatternsInCSharp.Adapter.TwoProviders
             } 
             else if (source == CharacterSource.Api)
             {
-                using (var client = new HttpClient())
+                var handler = new HttpClientHandler() { AllowAutoRedirect = true };
+                
+                using (var client = new HttpClient(handler))
                 {
-                    string url = "https://swapi.co/api/people";
+
+                    string url = ApiConstants.SWAPI_PEOPLE_ENDPOINT;
                     string result = await client.GetStringAsync(url);
                     people = JsonConvert.DeserializeObject<ApiResult<Person>>(result).Results;
                 }
