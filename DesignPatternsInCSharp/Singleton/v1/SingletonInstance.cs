@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass, DisableTestParallelization = true)]
 
 namespace DesignPatternsInCSharp.Singleton.v1
 {
@@ -33,17 +34,44 @@ namespace DesignPatternsInCSharp.Singleton.v1
         public void OnlyCallsConstructorOnceGivenThreeInstanceCalls()
         {
             Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance());
-            var result1 = Singleton.Instance;
-            Thread.Sleep(1);
-            var result2 = Singleton.Instance;
-            Thread.Sleep(1);
-            var result3 = Singleton.Instance;
+
+            var one = Singleton.Instance;
+            var two = Singleton.Instance;
+            var three = Singleton.Instance;
 
             var log = Logger.Output();
             Assert.Equal(1, log.Count(log => log.Contains("Constructor")));
             Assert.Equal(3, log.Count(log => log.Contains("Instance")));
 
             Logger.Output().ToList().ForEach(h => _output.WriteLine(h));
+        }
+
+        [Fact]
+        public void CallsConstructorMultipleTimesGivenThreeParallelInstanceCalls()
+        {
+            Assert.Null(SingletonTestHelpers.GetPrivateStaticInstance());
+
+            // configure logger to slow down the creation long enough to cause problems
+            Logger.DelayMilliseconds = 50;
+
+            var strings = new List<string>() { "one", "two", "three" };
+            var instances = new List<Singleton>();
+            var options = new ParallelOptions() { MaxDegreeOfParallelism = 3 };
+            Parallel.ForEach(strings, options, instance =>
+            {
+                instances.Add(Singleton.Instance);
+            });
+
+            var log = Logger.Output();
+            try
+            {
+                Assert.True(log.Count(log => log.Contains("Constructor")) > 1);
+                Assert.Equal(3, log.Count(log => log.Contains("Instance")));
+            }
+            finally
+            {
+                Logger.Output().ToList().ForEach(h => _output.WriteLine(h));
+            }
         }
     }
 }
