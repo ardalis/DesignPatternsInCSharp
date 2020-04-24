@@ -13,7 +13,7 @@ Some sample implementations of design patterns in C#.
 - [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-proxy)
 - [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 
-## Singleton
+## Singleton Design Pattern
 
 - [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 
