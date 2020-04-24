@@ -10,7 +10,12 @@ Some sample implementations of design patterns in C#.
 
 ## Proxy Design Pattern
 
-- Pluralsight Course (in progress)
+- [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-proxy)
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
+
+## Singleton
+
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 
 ## State Design Pattern
 
