@@ -1,20 +1,17 @@
 ﻿namespace DesignPatternsInCSharp.Singleton.v1
 {
     // Bad code
+#nullable enable
     public sealed class Singleton
     {
-        private static Singleton _instance;
+        private static Singleton? _instance;
 
         public static Singleton Instance
         {
             get
             {
                 Logger.Log("Instance called.");
-                if(_instance == null)
-                {
-                    _instance = new Singleton();
-                }
-                return _instance;
+                return _instance ??= new Singleton();
             }
         }
 

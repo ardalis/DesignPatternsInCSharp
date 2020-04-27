@@ -1,6 +1,5 @@
 ﻿namespace DesignPatternsInCSharp.Singleton.v4
 {
-    // Bad code
     // Source: https://csharpindepth.com/articles/singleton
     public sealed class Singleton
     {
@@ -9,7 +8,8 @@
         // reading this will initialize the _instance
         public static readonly string GREETING = "Hi!";
 
-        // Tell C# compiler not to mark type as beforefieldinit (https://csharpindepth.com/articles/BeforeFieldInit)
+        // Tell C# compiler not to mark type as beforefieldinit
+        // (https://csharpindepth.com/articles/BeforeFieldInit)
         static Singleton()
         {
         }
