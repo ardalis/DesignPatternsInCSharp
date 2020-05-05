@@ -19,37 +19,25 @@ namespace DesignPatternsInCSharp.KataWithPatterns
         {
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
-                if (item.Quality > 0)
+                if (item.Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        item.DecrementQuality();
-                    }
+                    item.DecrementQuality();
                 }
             }
             else
             {
-                if (item.Quality < 50)
+                item.IncrementQuality();
+
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    item.IncrementQuality();
-
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.SellIn < 11)
                     {
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.IncrementQuality();
-                            }
-                        }
+                        item.IncrementQuality();
+                    }
 
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.IncrementQuality();
-                            }
-                        }
+                    if (item.SellIn < 6)
+                    {
+                        item.IncrementQuality();
                     }
                 }
             }
@@ -59,32 +47,23 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 item.DecrementSellIn();
             }
 
-            if (item.SellIn < 0)
+            if (item.Name != "Aged Brie")
             {
-                if (item.Name != "Aged Brie")
+                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        if (item.Quality > 0)
-                        {
-                            if (item.Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                item.DecrementQuality();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        item.ResetQuality();
+                        item.DecrementQuality();
                     }
                 }
                 else
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.IncrementQuality();
-                    }
+                    item.ResetQuality();
                 }
+            }
+            else
+            {
+                item.IncrementQuality();
             }
         }
 
