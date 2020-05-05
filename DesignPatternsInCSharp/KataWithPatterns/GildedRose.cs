@@ -22,17 +22,14 @@ namespace DesignPatternsInCSharp.KataWithPatterns
 
         public void UpdateQuality(ItemProxy item)
         {
-            if(item.Name == "Sulfuras, Hand of Ragnaros")
+            if (item.Name == "Sulfuras, Hand of Ragnaros")
             {
                 UpdateSulfuras(item);
                 return;
             }
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    item.DecrementQuality();
-                }
+                item.DecrementQuality();
             }
             else
             {
@@ -52,28 +49,25 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 }
             }
 
-            if (item.Name != "Sulfuras, Hand of Ragnaros")
-            {
-                item.DecrementSellIn();
-            }
+            item.DecrementSellIn();
 
-            if (item.Name != "Aged Brie")
+            if (item.SellIn < 0)
             {
-                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (item.Name != "Aged Brie")
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
+                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                     {
                         item.DecrementQuality();
+                    }
+                    else
+                    {
+                        item.ResetQuality();
                     }
                 }
                 else
                 {
-                    item.ResetQuality();
+                    item.IncrementQuality();
                 }
-            }
-            else
-            {
-                item.IncrementQuality();
             }
         }
 
