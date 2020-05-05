@@ -2,6 +2,32 @@
 
 namespace DesignPatternsInCSharp.KataWithPatterns
 {
+    public abstract class RuleBase
+    {
+        public abstract bool IsMatch(ItemProxy item);
+        public abstract void UpdateItem(ItemProxy item);
+    }
+
+    public class NormalItemRule : RuleBase
+    {
+        public override bool IsMatch(ItemProxy item)
+        {
+            // default rule
+            return true;
+        }
+
+        public override void UpdateItem(ItemProxy item)
+        {
+            item.DecrementQuality();
+
+            item.DecrementSellIn();
+
+            if (item.SellIn < 0)
+            {
+                item.DecrementQuality();
+            }
+        }
+    }
     /// <summary>
     /// Source: https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/csharpcore
     /// Instructions: https://github.com/ardalis/kata-catalog/blob/master/katas/Gilded%20Rose.md
@@ -97,7 +123,8 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateConjuredItem(item);
                 return;
             }
-            UpdateNormalItem(item);
+            var rule = new NormalItemRule();
+            rule.UpdateItem(item);
         }
 
         public void UpdateQuality()
