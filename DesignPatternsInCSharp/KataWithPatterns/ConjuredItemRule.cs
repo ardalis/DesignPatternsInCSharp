@@ -7,18 +7,16 @@
             return item.Name == "Conjured Mana Cake";
         }
 
-        public override void UpdateItem(ItemProxy item)
+        public override void AdjustQuality(ItemProxy item)
         {
             item.DecrementQuality();
             item.DecrementQuality();
+        }
 
-            item.DecrementSellIn();
-
-            if (item.SellIn < 0)
-            {
-                item.DecrementQuality();
-                item.DecrementQuality();
-            }
+        public override void AdjustQualityForNegativeSellIn(ItemProxy item)
+        {
+            item.DecrementQuality();
+            item.DecrementQuality();
         }
     }
 }

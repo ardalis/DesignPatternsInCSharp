@@ -7,7 +7,7 @@
             return item.Name == "Backstage passes to a TAFKAL80ETC concert";
         }
 
-        public override void UpdateItem(ItemProxy item)
+        public override void AdjustQuality(ItemProxy item)
         {
             item.IncrementQuality();
             if (item.SellIn < 11)
@@ -19,11 +19,11 @@
             {
                 item.IncrementQuality();
             }
-            item.DecrementSellIn();
-            if (item.SellIn < 0)
-            {
-                item.ResetQuality();
-            }
+        }
+
+        public override void AdjustQualityForNegativeSellIn(ItemProxy item)
+        {
+            item.ResetQuality();
         }
     }
 }

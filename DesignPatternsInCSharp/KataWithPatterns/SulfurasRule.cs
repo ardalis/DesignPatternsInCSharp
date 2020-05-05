@@ -7,7 +7,12 @@
             return item.Name == "Sulfuras, Hand of Ragnaros";
         }
 
-        public override void UpdateItem(ItemProxy item)
+        public override void AdjustQuality(ItemProxy item)
+        {
+            // do nothing
+        }
+
+        public override void AdjustQualityForNegativeSellIn(ItemProxy item)
         {
             // do nothing
         }
