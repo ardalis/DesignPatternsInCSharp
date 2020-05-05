@@ -41,7 +41,7 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateAgedBrie(item);
                 return;
             }
-            if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 item.DecrementQuality();
             }
@@ -67,20 +67,13 @@ namespace DesignPatternsInCSharp.KataWithPatterns
 
             if (item.SellIn < 0)
             {
-                if (item.Name != "Aged Brie")
+                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        item.DecrementQuality();
-                    }
-                    else
-                    {
-                        item.ResetQuality();
-                    }
+                    item.DecrementQuality();
                 }
                 else
                 {
-                    item.IncrementQuality();
+                    item.ResetQuality();
                 }
             }
         }
