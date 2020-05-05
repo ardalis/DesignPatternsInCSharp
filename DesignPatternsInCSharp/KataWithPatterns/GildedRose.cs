@@ -17,7 +17,12 @@ namespace DesignPatternsInCSharp.KataWithPatterns
 
         public void UpdateQuality(ItemProxy item)
         {
-            var engine = new ItemQualityRuleEngine();
+            var engine = new ItemQualityRuleEngine.Builder()
+                .WithAgedBrieRule()
+                .WithBackstagePassesRule()
+                .WithConjuredItemRule()
+                .WithSulfurasRule()
+                .Build();
             engine.ApplyRules(item);
         }
 
