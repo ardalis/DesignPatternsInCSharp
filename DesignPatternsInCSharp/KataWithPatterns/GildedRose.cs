@@ -29,6 +29,25 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 item.IncrementQuality();
             }
         }
+
+        public void UpdateBackstagePasses(ItemProxy item)
+        {
+            item.IncrementQuality();
+            if (item.SellIn < 11)
+            {
+                item.IncrementQuality();
+            }
+
+            if (item.SellIn < 6)
+            {
+                item.IncrementQuality();
+            }
+            item.DecrementSellIn();
+            if (item.SellIn < 0)
+            {
+                item.ResetQuality();
+            }
+        }
         public void UpdateQuality(ItemProxy item)
         {
             if (item.Name == "Sulfuras, Hand of Ragnaros")
@@ -41,40 +60,18 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateAgedBrie(item);
                 return;
             }
-            if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
             {
-                item.DecrementQuality();
+                UpdateBackstagePasses(item);
+                return;
             }
-            else
-            {
-                item.IncrementQuality();
-
-                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (item.SellIn < 11)
-                    {
-                        item.IncrementQuality();
-                    }
-
-                    if (item.SellIn < 6)
-                    {
-                        item.IncrementQuality();
-                    }
-                }
-            }
+            item.DecrementQuality();
 
             item.DecrementSellIn();
 
             if (item.SellIn < 0)
             {
-                if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    item.DecrementQuality();
-                }
-                else
-                {
-                    item.ResetQuality();
-                }
+                item.DecrementQuality();
             }
         }
 
