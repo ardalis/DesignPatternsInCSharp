@@ -2,44 +2,6 @@
 
 namespace DesignPatternsInCSharp.KataWithPatterns
 {
-    public abstract class RuleBase
-    {
-        public abstract bool IsMatch(ItemProxy item);
-        public abstract void UpdateItem(ItemProxy item);
-    }
-
-    public class NormalItemRule : RuleBase
-    {
-        public override bool IsMatch(ItemProxy item)
-        {
-            // default rule
-            return true;
-        }
-
-        public override void UpdateItem(ItemProxy item)
-        {
-            item.DecrementQuality();
-
-            item.DecrementSellIn();
-
-            if (item.SellIn < 0)
-            {
-                item.DecrementQuality();
-            }
-        }
-    }
-    public class SulfurasRule : RuleBase
-    {
-        public override bool IsMatch(ItemProxy item)
-        {
-            return item.Name == "Sulfuras, Hand of Ragnaros";
-        }
-
-        public override void UpdateItem(ItemProxy item)
-        {
-            // do nothing
-        }
-    }
     /// <summary>
     /// Source: https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/csharpcore
     /// Instructions: https://github.com/ardalis/kata-catalog/blob/master/katas/Gilded%20Rose.md
@@ -82,20 +44,6 @@ namespace DesignPatternsInCSharp.KataWithPatterns
             }
         }
 
-        public void UpdateConjuredItem(ItemProxy item)
-        {
-            item.DecrementQuality();
-            item.DecrementQuality();
-
-            item.DecrementSellIn();
-
-            if (item.SellIn < 0)
-            {
-                item.DecrementQuality();
-                item.DecrementQuality();
-            }
-        }
-
         public void UpdateQuality(ItemProxy item)
         {
             if (item.Name == "Aged Brie")
@@ -108,13 +56,10 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateBackstagePasses(item);
                 return;
             }
-            if (item.Name == "Conjured Mana Cake")
-            {
-                UpdateConjuredItem(item);
-                return;
-            }
+
             var rules = new List<RuleBase>();
             rules.Add(new SulfurasRule());
+            rules.Add(new ConjuredItemRule());
             rules.Add(new NormalItemRule());
             foreach (var rule in rules)
             {
