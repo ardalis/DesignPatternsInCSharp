@@ -28,6 +28,18 @@ namespace DesignPatternsInCSharp.KataWithPatterns
             }
         }
     }
+    public class SulfurasRule : RuleBase
+    {
+        public override bool IsMatch(ItemProxy item)
+        {
+            return item.Name == "Sulfuras, Hand of Ragnaros";
+        }
+
+        public override void UpdateItem(ItemProxy item)
+        {
+            // do nothing
+        }
+    }
     /// <summary>
     /// Source: https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/csharpcore
     /// Instructions: https://github.com/ardalis/kata-catalog/blob/master/katas/Gilded%20Rose.md
@@ -39,11 +51,6 @@ namespace DesignPatternsInCSharp.KataWithPatterns
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
-        }
-
-        public void UpdateSulfuras(ItemProxy item)
-        {
-            // do nothing
         }
 
         public void UpdateAgedBrie(ItemProxy item)
@@ -75,18 +82,6 @@ namespace DesignPatternsInCSharp.KataWithPatterns
             }
         }
 
-        public void UpdateNormalItem(ItemProxy item)
-        {
-            item.DecrementQuality();
-
-            item.DecrementSellIn();
-
-            if (item.SellIn < 0)
-            {
-                item.DecrementQuality();
-            }
-        }
-
         public void UpdateConjuredItem(ItemProxy item)
         {
             item.DecrementQuality();
@@ -103,11 +98,6 @@ namespace DesignPatternsInCSharp.KataWithPatterns
 
         public void UpdateQuality(ItemProxy item)
         {
-            if (item.Name == "Sulfuras, Hand of Ragnaros")
-            {
-                UpdateSulfuras(item);
-                return;
-            }
             if (item.Name == "Aged Brie")
             {
                 UpdateAgedBrie(item);
@@ -123,8 +113,17 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateConjuredItem(item);
                 return;
             }
-            var rule = new NormalItemRule();
-            rule.UpdateItem(item);
+            var rules = new List<RuleBase>();
+            rules.Add(new SulfurasRule());
+            rules.Add(new NormalItemRule());
+            foreach (var rule in rules)
+            {
+                if (rule.IsMatch(item))
+                {
+                    rule.UpdateItem(item);
+                    break;
+                }
+            }
         }
 
         public void UpdateQuality()
