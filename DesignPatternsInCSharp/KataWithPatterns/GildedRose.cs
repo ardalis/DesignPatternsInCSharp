@@ -20,11 +20,25 @@ namespace DesignPatternsInCSharp.KataWithPatterns
             // do nothing
         }
 
+        public void UpdateAgedBrie(ItemProxy item)
+        {
+            item.IncrementQuality();
+            item.DecrementSellIn();
+            if (item.SellIn < 0)
+            {
+                item.IncrementQuality();
+            }
+        }
         public void UpdateQuality(ItemProxy item)
         {
             if (item.Name == "Sulfuras, Hand of Ragnaros")
             {
                 UpdateSulfuras(item);
+                return;
+            }
+            if (item.Name == "Aged Brie")
+            {
+                UpdateAgedBrie(item);
                 return;
             }
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
