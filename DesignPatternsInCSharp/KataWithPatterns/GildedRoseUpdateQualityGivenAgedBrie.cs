@@ -41,6 +41,28 @@ namespace DesignPatternsInCSharp.KataWithPatterns
         }
 
         [Fact]
+        public void DoesNotIncreaseQualityBeyond50()
+        {
+            _item.Quality = 50;
+            _service.UpdateQuality();
+
+            Assert.Equal(50, _item.Quality);
+        }
+
+        [Theory]
+        [InlineData(48)]
+        [InlineData(49)]
+        [InlineData(50)]
+        public void DoesNotIncreaseQualityAbove50GivenNonPositiveSellIn(int initialQuality)
+        {
+            _item.SellIn = 0;
+            _item.Quality = initialQuality;
+            _service.UpdateQuality();
+
+            Assert.Equal(50, _item.Quality);
+        }
+
+        [Fact]
         public void ReducesAgedBrieSellInBy1()
         {
             _service.UpdateQuality();
