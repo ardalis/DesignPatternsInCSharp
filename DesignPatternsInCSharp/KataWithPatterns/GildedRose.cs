@@ -48,6 +48,33 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 item.ResetQuality();
             }
         }
+
+        public void UpdateNormalItem(ItemProxy item)
+        {
+            item.DecrementQuality();
+
+            item.DecrementSellIn();
+
+            if (item.SellIn < 0)
+            {
+                item.DecrementQuality();
+            }
+        }
+
+        public void UpdateConjuredItem(ItemProxy item)
+        {
+            item.DecrementQuality();
+            item.DecrementQuality();
+
+            item.DecrementSellIn();
+
+            if (item.SellIn < 0)
+            {
+                item.DecrementQuality();
+                item.DecrementQuality();
+            }
+        }
+
         public void UpdateQuality(ItemProxy item)
         {
             if (item.Name == "Sulfuras, Hand of Ragnaros")
@@ -65,14 +92,12 @@ namespace DesignPatternsInCSharp.KataWithPatterns
                 UpdateBackstagePasses(item);
                 return;
             }
-            item.DecrementQuality();
-
-            item.DecrementSellIn();
-
-            if (item.SellIn < 0)
+            if (item.Name == "Conjured Mana Cake")
             {
-                item.DecrementQuality();
+                UpdateConjuredItem(item);
+                return;
             }
+            UpdateNormalItem(item);
         }
 
         public void UpdateQuality()
