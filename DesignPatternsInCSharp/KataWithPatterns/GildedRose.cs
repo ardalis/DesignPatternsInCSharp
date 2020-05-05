@@ -15,8 +15,18 @@ namespace DesignPatternsInCSharp.KataWithPatterns
             this.Items = Items;
         }
 
+        public void UpdateSulfuras(ItemProxy item)
+        {
+            // do nothing
+        }
+
         public void UpdateQuality(ItemProxy item)
         {
+            if(item.Name == "Sulfuras, Hand of Ragnaros")
+            {
+                UpdateSulfuras(item);
+                return;
+            }
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 if (item.Name != "Sulfuras, Hand of Ragnaros")
