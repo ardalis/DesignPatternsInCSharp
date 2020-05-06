@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreeterService", "GreeterService\GreeterService.csproj", "{1F527722-FD31-4DC4-9FC9-8F259724107D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreeterService", "GreeterService\GreeterService.csproj", "{1F527722-FD31-4DC4-9FC9-8F259724107D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatternsInCSharp.Benchmarks", "DesignPatternsInCSharp.Benchmarks\DesignPatternsInCSharp.Benchmarks.csproj", "{D6F7EB79-9204-4062-A3EB-EC001F60ECAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{1F527722-FD31-4DC4-9FC9-8F259724107D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F527722-FD31-4DC4-9FC9-8F259724107D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F527722-FD31-4DC4-9FC9-8F259724107D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F7EB79-9204-4062-A3EB-EC001F60ECAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F7EB79-9204-4062-A3EB-EC001F60ECAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F7EB79-9204-4062-A3EB-EC001F60ECAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F7EB79-9204-4062-A3EB-EC001F60ECAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
