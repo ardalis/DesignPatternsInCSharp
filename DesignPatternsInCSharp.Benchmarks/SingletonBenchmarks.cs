@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using BenchmarkDotNet.Attributes;
@@ -28,67 +29,67 @@ namespace DesignPatternsInCSharp.Benchmarks
         [Benchmark(Baseline = true)]
         public void Naive()
         {
-            var instances = new List<Singleton.v1.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v1.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v1.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v1.Singleton.Instance, 0));
         }
 
         [Benchmark]
         public void Locking()
         {
-            var instances = new List<Singleton.v2.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v2.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v2.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v2.Singleton.Instance, 0));
         }
 
         [Benchmark]
         public void BetterLocking()
         {
-            var instances = new List<Singleton.v3.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v3.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v3.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v3.Singleton.Instance, 0));
         }
 
         [Benchmark]
         public void LessLazy()
         {
-            var instances = new List<Singleton.v4.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v4.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v4.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v4.Singleton.Instance, 0));
         }
 
         [Benchmark]
         public void NestedLazy()
         {
-            var instances = new List<Singleton.v5.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v5.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v5.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v5.Singleton.Instance, 0));
         }
 
         [Benchmark]
         public void LazyOfT()
         {
-            var instances = new List<Singleton.v6.Singleton>();
+            var instances = new ConcurrentDictionary<Singleton.v6.Singleton, byte>();
 
             Parallel.ForEach(
                 _strings,
                 _parallelOptions,
-                _ => instances.Add(Singleton.v6.Singleton.Instance));
+                _ => instances.TryAdd(Singleton.v6.Singleton.Instance, 0));
         }
     }
 }
