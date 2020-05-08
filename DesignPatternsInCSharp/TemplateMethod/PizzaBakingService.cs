@@ -1,8 +1,5 @@
-﻿using Xunit.Sdk;
-
-namespace DesignPatternsInCSharp.TemplateMethod
+﻿namespace DesignPatternsInCSharp.TemplateMethod
 {
-
     public class PizzaBakingService : PanFoodServiceBase<Pizza>
     {
         public PizzaBakingService(LoggerAdapter logger) : base(logger)
