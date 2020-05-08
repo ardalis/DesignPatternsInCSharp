@@ -1,17 +1,11 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
-
-namespace DesignPatternsInCSharp.TemplateMethod
+﻿namespace DesignPatternsInCSharp.TemplateMethod
 {
-    public class Pie : BakedPanFood { }
+    public class Pie : PanFood { }
 
-    public class PieBakingService : PanBakingServiceBase<Pie>
+    public class PieBakingService : PanFoodServiceBase<Pie>
     {
-        private readonly LoggerAdapter _logger;
-        private Pie _pie;
-
-        public PieBakingService(LoggerAdapter logger)
+        public PieBakingService(LoggerAdapter logger) : base(logger)
         {
-            _logger = logger;
         }
 
         protected override void PrepareCrust()

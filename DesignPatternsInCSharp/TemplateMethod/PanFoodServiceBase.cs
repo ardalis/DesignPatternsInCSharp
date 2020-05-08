@@ -1,8 +1,14 @@
 ﻿namespace DesignPatternsInCSharp.TemplateMethod
 {
-    public abstract class PanBakingServiceBase<T> where T:BakedPanFood, new()
+    public abstract class PanFoodServiceBase<T> where T:PanFood, new()
     {
+        protected readonly LoggerAdapter _logger;
         protected T _item;
+
+        public PanFoodServiceBase(LoggerAdapter logger)
+        {
+            _logger = logger;
+        }
 
         // The Template Method
         public T Prepare()
@@ -15,7 +21,10 @@
 
             Cover();
 
-            Bake();
+            if (_item.RequiresBaking)
+            {
+                Bake();
+            }
 
             Slice();
 
@@ -26,7 +35,10 @@
 
         protected abstract void AddToppings();
 
-        protected abstract void Bake();
+        protected virtual void Bake()
+        {
+            _logger.Log("Bake the item.");
+        }
 
         protected abstract void Slice();
 

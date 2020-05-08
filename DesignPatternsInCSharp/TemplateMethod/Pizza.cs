@@ -1,6 +1,4 @@
 ﻿namespace DesignPatternsInCSharp.TemplateMethod
 {
-    public abstract class BakedPanFood
-    {
-    }
+    public class Pizza : PanFood { }
 }

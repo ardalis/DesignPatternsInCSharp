@@ -3,10 +3,10 @@ using Xunit.Abstractions;
 
 namespace DesignPatternsInCSharp.TemplateMethod
 {
-    public class PizzaBakingServicePreparePizza
+    public class ColdVeggiePizzaBakingServicePrepare
     {
         private readonly ITestOutputHelper _output;
-        public PizzaBakingServicePreparePizza(ITestOutputHelper output)
+        public ColdVeggiePizzaBakingServicePrepare(ITestOutputHelper output)
         {
             _output = output;
         }
@@ -15,7 +15,7 @@ namespace DesignPatternsInCSharp.TemplateMethod
         public void ReturnsAPizza()
         {
             var logger = new LoggerAdapter();
-            var service = new PizzaBakingService(logger);
+            var service = new ColdVeggiePizzaBakingService(logger);
 
             var pizza = service.Prepare();
 

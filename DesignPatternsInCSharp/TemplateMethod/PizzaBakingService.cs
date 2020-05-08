@@ -2,16 +2,13 @@
 
 namespace DesignPatternsInCSharp.TemplateMethod
 {
-    public class Pizza : BakedPanFood { }
 
-    public class PizzaBakingService : PanBakingServiceBase<Pizza>
+    public class PizzaBakingService : PanFoodServiceBase<Pizza>
     {
-        private readonly LoggerAdapter _logger;
         private Pizza _pizza;
 
-        public PizzaBakingService(LoggerAdapter logger)
+        public PizzaBakingService(LoggerAdapter logger) : base(logger)
         {
-            _logger = logger;
         }
 
         protected override void PrepareCrust()
