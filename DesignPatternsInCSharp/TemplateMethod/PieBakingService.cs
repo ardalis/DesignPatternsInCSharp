@@ -1,8 +1,10 @@
-﻿namespace DesignPatternsInCSharp.TemplateMethod
-{
-    public class Pie { }
+﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
 
-    public class PieBakingService
+namespace DesignPatternsInCSharp.TemplateMethod
+{
+    public class Pie : BakedPanFood { }
+
+    public class PieBakingService : PanBakingServiceBase<Pie>
     {
         private readonly LoggerAdapter _logger;
         private Pie _pie;
@@ -12,45 +14,30 @@
             _logger = logger;
         }
 
-        public Pie PreparePie()
-        {
-            _pie = new Pie();
-
-            PrepareCrust();
-
-            AddFilling();
-
-            Cover();
-
-            Bake();
-
-            Slice();
-
-            return _pie;
-        }
-
-        private void PrepareCrust()
+        protected override void PrepareCrust()
         {
             _logger.Log("Rolling out crust and pressing into pie pan");
         }
 
-        private void AddFilling()
+        protected override void AddToppings()
         {
             _logger.Log("Adding pie filling");
         }
 
-        private void Cover()
+        protected override void Cover()
         {
             _logger.Log("Adding lattice top");
         }
-        private void Bake()
+
+        protected override void Bake()
         {
             _logger.Log("Baking for 45 minutes");
         }
 
-        private void Slice()
+        protected override void Slice()
         {
             _logger.Log("Cutting into 6 slices.");
         }
+
     }
 }

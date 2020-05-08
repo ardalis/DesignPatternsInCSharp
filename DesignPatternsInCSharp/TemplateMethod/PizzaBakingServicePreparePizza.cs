@@ -17,7 +17,7 @@ namespace DesignPatternsInCSharp.TemplateMethod
             var logger = new LoggerAdapter();
             var service = new PizzaBakingService(logger);
             
-            var pizza = service.PreparePizza();
+            var pizza = service.Prepare();
 
             Assert.NotNull(pizza);
             _output.WriteLine(logger.Dump());

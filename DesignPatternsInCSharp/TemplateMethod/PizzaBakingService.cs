@@ -1,8 +1,10 @@
-﻿namespace DesignPatternsInCSharp.TemplateMethod
-{
-    public class Pizza { }
+﻿using Xunit.Sdk;
 
-    public class PizzaBakingService
+namespace DesignPatternsInCSharp.TemplateMethod
+{
+    public class Pizza : BakedPanFood { }
+
+    public class PizzaBakingService : PanBakingServiceBase<Pizza>
     {
         private readonly LoggerAdapter _logger;
         private Pizza _pizza;
@@ -12,38 +14,25 @@
             _logger = logger;
         }
 
-        public Pizza PreparePizza()
-        {
-            _pizza = new Pizza();
-            PrepareCrust();
-
-            AddToppings();
-
-            Bake();
-
-            Slice();
-
-            return _pizza;
-        }
-
-        private void PrepareCrust()
+        protected override void PrepareCrust()
         {
             _logger.Log("Rolling out and hand tossing the dough");
         }
 
-        private void AddToppings()
+        protected override void AddToppings()
         {
             _logger.Log("Adding pizza toppings");
         }
 
-        private void Bake()
+        protected override void Bake()
         {
             _logger.Log("Baking for 15 minutes");
         }
 
-        private void Slice()
+        protected override void Slice()
         {
             _logger.Log("Cutting into 8 slices.");
         }
+
     }
 }
