@@ -2,6 +2,11 @@
 
 Some sample implementations of design patterns in C#.
 
+## Design Patterns Overview
+
+- [Pluralsight Course](https://www.pluralsight.com/courses/design-patterns-overview)
+- [Pluralsight Learning Path](https://www.pluralsight.com/paths/design-patterns-in-c)
+
 ## Adapter Design Pattern
 
 - [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-adapter)
