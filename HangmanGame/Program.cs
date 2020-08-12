@@ -1,5 +1,6 @@
 ﻿using DesignPatternsInCSharp.Memento;
 using System;
+using System.Collections.Generic;
 
 namespace HangmanGameApp
 {
@@ -7,7 +8,10 @@ namespace HangmanGameApp
     {
         static void Main(string[] args)
         {
-            var game = new HangmanGame();
+            //var game = new HangmanGame();
+            var game = new HangmanGameWithUndo();
+            var gameHistory = new Stack<IMemento>();
+            gameHistory.Push(game.CreateSetPoint());
 
             Console.WriteLine("Welcome to Hangman");
 
@@ -19,7 +23,18 @@ namespace HangmanGameApp
                 Console.WriteLine("Guess: ");
 
                 var entry = Console.ReadLine();
+
+                if(entry == "-")
+                {
+                    if(gameHistory.Count > 1)
+                    {
+                        gameHistory.Pop();
+                        game.ResumeFrom(gameHistory.Peek());
+                        continue;
+                    }
+                }
                 game.Guess(entry);
+                gameHistory.Push(game.CreateSetPoint());
             }
 
             if(game.Result == GameResult.Won)

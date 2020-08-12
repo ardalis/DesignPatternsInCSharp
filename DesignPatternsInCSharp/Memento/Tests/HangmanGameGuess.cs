@@ -12,6 +12,7 @@ namespace DesignPatternsInCSharp.Memento.Tests
         [Theory]
         [InlineData("AA")]
         [InlineData("")]
+        [InlineData("-")]
         public void ThrowsGivenInvalidGuess(string invalidGuess)
         {
             Assert.Throws<InvalidGuessException>(() => _game.Guess(invalidGuess));
