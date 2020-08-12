@@ -16,10 +16,13 @@ namespace HangmanGameApp
             var gameHistory = new Stack<IMemento>();
             gameHistory.Push(game.CreateSetPoint());
 
-            Console.WriteLine("Welcome to Hangman");
 
             while (!game.IsOver)
             {
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("Welcome to Hangman");
+
                 Console.WriteLine(game.CurrentMaskedWord);
                 Console.WriteLine($"Previous Guesses: {String.Join(',', game.PreviousGuesses.ToArray())}");
                 Console.WriteLine($"Guesses Left: {game.GuessesRemaining}");
@@ -33,11 +36,13 @@ namespace HangmanGameApp
                     {
                         gameHistory.Pop();
                         game.ResumeFrom(gameHistory.Peek());
+                        Console.WriteLine();
                         continue;
                     }
                 }
                 game.Guess(entry);
                 gameHistory.Push(game.CreateSetPoint());
+                Console.WriteLine();
             }
 
             if(game.Result == GameResult.Won)
