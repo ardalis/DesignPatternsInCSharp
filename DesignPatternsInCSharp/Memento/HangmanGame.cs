@@ -22,14 +22,11 @@ namespace DesignPatternsInCSharp.Memento
         public int GuessesRemaining => INITIAL_GUESSES - PreviousGuesses.Count(c => !CurrentMaskedWord.Contains(c));
         public GameResult Result { get; private set; }
 
-        public void Guess(string entry)
+        public void Guess(char guessChar)
         {
-            if (String.IsNullOrWhiteSpace(entry)) throw new InvalidGuessException("Guess must be a valid character.");
-            if (entry.Length > 1) throw new InvalidGuessException("Guess must be a single character.");
-            if (!Regex.IsMatch(entry, "^[A-Za-z]$")) throw new InvalidGuessException("Guess must be a capital letter A through Z");
+            if (char.IsWhiteSpace(guessChar)) throw new InvalidGuessException("Guess cannot be blank.");
+            if (!Regex.IsMatch(guessChar.ToString(), "^[A-Z]$")) throw new InvalidGuessException("Guess must be a capital letter A through Z");
             if (IsOver) throw new InvalidGuessException("Can't make guesses after game is over.");
-
-            char guessChar = Convert.ToChar(entry.ToUpperInvariant());
 
             if (PreviousGuesses.Any(g => g == guessChar)) throw new DuplicateGuessException();
 

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace HangmanGameApp
 {
+    /// <summary>
+    /// This program uses the Memento pattern
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -20,11 +23,11 @@ namespace HangmanGameApp
                 Console.WriteLine(game.CurrentMaskedWord);
                 Console.WriteLine($"Previous Guesses: {String.Join(',', game.PreviousGuesses.ToArray())}");
                 Console.WriteLine($"Guesses Left: {game.GuessesRemaining}");
-                Console.WriteLine("Guess: ");
+                Console.WriteLine("Guess (a-z or '-' to undo last guess): ");
 
-                var entry = Console.ReadLine();
+                var entry = char.ToUpperInvariant(Console.ReadKey().KeyChar);
 
-                if(entry == "-")
+                if(entry == '-')
                 {
                     if(gameHistory.Count > 1)
                     {

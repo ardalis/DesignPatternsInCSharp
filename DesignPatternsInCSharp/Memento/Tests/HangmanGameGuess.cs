@@ -10,10 +10,10 @@ namespace DesignPatternsInCSharp.Memento.Tests
         private HangmanGame _game = new HangmanGame(TEST_SECRET_WORD);
 
         [Theory]
-        [InlineData("AA")]
-        [InlineData("")]
-        [InlineData("-")]
-        public void ThrowsGivenInvalidGuess(string invalidGuess)
+        [InlineData(' ')]
+        [InlineData('-')]
+        [InlineData('1')]
+        public void ThrowsGivenInvalidGuess(char invalidGuess)
         {
             Assert.Throws<InvalidGuessException>(() => _game.Guess(invalidGuess));
         }
@@ -21,7 +21,7 @@ namespace DesignPatternsInCSharp.Memento.Tests
         [Fact]
         public void ThrowsGivenDuplicateGuess()
         {
-            string wrongGuess = "Z";
+            char wrongGuess = 'Z';
             _game.Guess(wrongGuess);
 
             Assert.Throws<DuplicateGuessException>(() => _game.Guess(wrongGuess));
@@ -30,18 +30,18 @@ namespace DesignPatternsInCSharp.Memento.Tests
         [Fact]
         public void ThrowsGivenValidGuessWhenGameIsOver()
         {
-            _game.Guess("t");
-            _game.Guess("e");
-            _game.Guess("s"); // game over - WON
+            _game.Guess('T');
+            _game.Guess('E');
+            _game.Guess('S'); // game over - WON
 
-            Assert.Throws<InvalidGuessException>(() => _game.Guess("a"));
+            Assert.Throws<InvalidGuessException>(() => _game.Guess('A'));
         }
 
         [Fact]
         public void DecrementsGuessesRemainingGivenInvalidGuess()
         {
             int initialGuesses = _game.GuessesRemaining;
-            string wrongGuess = "Z";
+            char wrongGuess = 'Z';
 
             _game.Guess(wrongGuess);
 
@@ -49,9 +49,8 @@ namespace DesignPatternsInCSharp.Memento.Tests
         }
 
         [Theory]
-        [InlineData("E")]
-        [InlineData("e")]
-        public void DoesNotDecrementGuessesRemainingGivenValidGuess(string correctGuess)
+        [InlineData('E')]
+        public void DoesNotDecrementGuessesRemainingGivenValidGuess(char correctGuess)
         {
             int initialGuesses = _game.GuessesRemaining;
 
@@ -63,7 +62,7 @@ namespace DesignPatternsInCSharp.Memento.Tests
         [Fact]
         public void MaskedWordIncludesGuessLetterIfCorrect()
         {
-            string correctGuess = "E";
+            char correctGuess = 'E';
 
             _game.Guess(correctGuess);
 
@@ -72,24 +71,24 @@ namespace DesignPatternsInCSharp.Memento.Tests
 
         [Fact]
         public void SetsGameIsOverTrueAndResultLostWhenGuessesLeftReaches0()
-        {
-            _game.Guess("a");
-            _game.Guess("b");
-            _game.Guess("c");
-            _game.Guess("d");
-            _game.Guess("e"); // correct
-            _game.Guess("f");
+        {               
+            _game.Guess('A');
+            _game.Guess('B');
+            _game.Guess('C');
+            _game.Guess('D');
+            _game.Guess('E'); // correct
+            _game.Guess('F');
 
             Assert.True(_game.IsOver);
             Assert.Equal(GameResult.Lost, _game.Result);
         }
 
         [Fact]
-        public void SetsGameIsOverTrueAndResultWonWhenGuessesLeftReaches0()
+        public void SetsGameIsOverTrueAndResultWonWhenEntireWordIsGuessed()
         {
-            _game.Guess("t");
-            _game.Guess("e");
-            _game.Guess("s");
+            _game.Guess('T');
+            _game.Guess('E');
+            _game.Guess('S');
 
             Assert.True(_game.IsOver);
             Assert.Equal(GameResult.Won, _game.Result);
