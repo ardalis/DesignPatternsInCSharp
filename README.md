@@ -13,12 +13,24 @@ Some sample implementations of design patterns in C#.
 - [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 - [Twitch Live Stream Recording](https://www.youtube.com/watch?v=UNOlmL48fQc)
 
+## Memento Design Pattern
+
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
+
 ## Proxy Design Pattern
 
 - [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-proxy)
 - [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 
+## Rules Engine Pattern
+
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
+
 ## Singleton Design Pattern
+
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
+
+## Specification Design Pattern
 
 - [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
 
