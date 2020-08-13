@@ -29,3 +29,4 @@ Some sample implementations of design patterns in C#.
 ## Template Method Pattern
 
 - [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-template-method)
+- [Pluralsight Course (Patterns Library - Older)](https://www.pluralsight.com/courses/patterns-library)
