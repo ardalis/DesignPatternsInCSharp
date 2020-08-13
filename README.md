@@ -25,3 +25,7 @@ Some sample implementations of design patterns in C#.
 ## State Design Pattern
 
 - [GitHub Repo](https://github.com/ardalis/StatePattern)
+
+## Template Method Pattern
+
+- [Pluralsight Course](https://www.pluralsight.com/courses/c-sharp-design-patterns-template-method)
