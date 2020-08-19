@@ -15,6 +15,10 @@ namespace HangmanGameApp
         {
 
 #if SupportUndo
+            // MEMENTO NOTES:
+            // HangmanGameWithUndo == ORIGINATOR
+            // This Main Program   == CARETAKER
+            // HangmanMemento      == MEMENTO
             var game = new HangmanGameWithUndo();
             var gameHistory = new Stack<HangmanMemento>();
             gameHistory.Push(game.CreateSetPoint());
