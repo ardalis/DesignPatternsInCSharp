@@ -2,7 +2,7 @@
 
 namespace DesignPatternsInCSharp.Memento.Tests
 {
-    public class HangmaneGameConstructor
+    public class HangmaneGamConstructor
     {
         private const string TEST_SECRET_WORD = "TEST";
 

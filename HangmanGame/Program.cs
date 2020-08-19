@@ -1,4 +1,6 @@
-﻿using DesignPatternsInCSharp.Memento;
+﻿#define SupportUndo
+
+using DesignPatternsInCSharp.Memento;
 using System;
 using System.Collections.Generic;
 
@@ -11,11 +13,14 @@ namespace HangmanGameApp
     {
         static void Main(string[] args)
         {
-            //var game = new HangmanGame();
-            var game = new HangmanGameWithUndo();
-            var gameHistory = new Stack<IMemento>();
-            gameHistory.Push(game.CreateSetPoint());
 
+#if SupportUndo
+            var game = new HangmanGameWithUndo();
+            var gameHistory = new Stack<HangmanMemento>();
+            gameHistory.Push(game.CreateSetPoint());
+#else
+            var game = new HangmanGame();
+#endif
 
             while (!game.IsOver)
             {
@@ -26,10 +31,16 @@ namespace HangmanGameApp
                 Console.WriteLine(game.CurrentMaskedWord);
                 Console.WriteLine($"Previous Guesses: {String.Join(',', game.PreviousGuesses.ToArray())}");
                 Console.WriteLine($"Guesses Left: {game.GuessesRemaining}");
+
+#if SupportUndo
                 Console.WriteLine("Guess (a-z or '-' to undo last guess): ");
+#else
+                Console.WriteLine("Guess (a-z): ");
+#endif
 
                 var entry = char.ToUpperInvariant(Console.ReadKey().KeyChar);
 
+#if SupportUndo
                 if(entry == '-')
                 {
                     if(gameHistory.Count > 1)
@@ -40,8 +51,11 @@ namespace HangmanGameApp
                         continue;
                     }
                 }
+#endif
                 game.Guess(entry);
+#if SupportUndo
                 gameHistory.Push(game.CreateSetPoint());
+#endif
                 Console.WriteLine();
             }
 

@@ -2,22 +2,18 @@
 {
     public class HangmanGameWithUndo : HangmanGame
     {
-        public IMemento CreateSetPoint()
+        public HangmanMemento CreateSetPoint()
         {
             var guesses = PreviousGuesses.ToArray();
-            return new HangmanState() { State = guesses };
+            return new HangmanMemento() { Guesses = guesses };
         }
 
-        public void ResumeFrom(IMemento memento)
+        public void ResumeFrom(HangmanMemento memento)
         {
-            var guesses = (char[])memento.State;
+            var guesses = memento.Guesses;
             PreviousGuesses.Clear();
             PreviousGuesses.AddRange(guesses);
         }
-
-        public class HangmanState : IMemento
-        {
-            public object State { get; set; }
-        }
     }
+
 }
