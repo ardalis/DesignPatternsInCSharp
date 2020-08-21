@@ -24,6 +24,8 @@ namespace DesignPatternsInCSharp.Memento
 
         public void Guess(char guessChar)
         {
+            // TODO: Consider using Ardalis.GuardClauses
+            // TODO: Consider returning Ardalis.Result
             if (char.IsWhiteSpace(guessChar)) throw new InvalidGuessException("Guess cannot be blank.");
             if (!Regex.IsMatch(guessChar.ToString(), "^[A-Z]$")) throw new InvalidGuessException("Guess must be a capital letter A through Z");
             if (IsOver) throw new InvalidGuessException("Can't make guesses after game is over.");
