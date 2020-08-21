@@ -3,6 +3,7 @@
 using DesignPatternsInCSharp.Memento;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace HangmanGameApp
 {
@@ -56,14 +57,27 @@ namespace HangmanGameApp
                     }
                 }
 #endif
-                game.Guess(entry);
+                try
+                {
+                    game.Guess(entry);
 #if SupportUndo
-                gameHistory.Push(game.CreateSetPoint());
+                    gameHistory.Push(game.CreateSetPoint());
 #endif
-                Console.WriteLine();
+                    Console.WriteLine();
+                }
+                catch (DuplicateGuessException)
+                {
+                    OutputError("You already guessed that.");
+                    continue;
+                }
+                catch (InvalidGuessException)
+                {
+                    OutputError("Sorry, invalid guess.");
+                    continue;
+                }
             }
 
-            if(game.Result == GameResult.Won)
+            if (game.Result == GameResult.Won)
             {
                 Console.WriteLine("CONGRATS! YOU WON!");
             }
@@ -72,6 +86,15 @@ namespace HangmanGameApp
             {
                 Console.WriteLine("SORRY, You lost this time. Try again!");
             }
+        }
+
+        private static void OutputError(string message)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
+            Thread.Sleep(3000);
         }
     }
 }
