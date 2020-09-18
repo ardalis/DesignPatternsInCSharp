@@ -6,10 +6,16 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
     {
         public decimal CalculateDiscountPercentage(Customer customer)
         {
+            if(!customer.DateOfFirstPurchase.HasValue)
+            {
+                return .15m;
+            }
+
             if(customer.DateOfBirth < DateTime.Now.AddYears(-65))
             {
                 return .05m;
             }
+
             return 0;
         }
     }
