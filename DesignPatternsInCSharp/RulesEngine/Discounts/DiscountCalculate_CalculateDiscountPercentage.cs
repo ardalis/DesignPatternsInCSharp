@@ -41,6 +41,19 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             result.Should().Be(.15m);
         }
 
+        [Theory]
+        [InlineData(20)]
+        [InlineData(70)]
+        public void Returns10PctForCustomersWhoAreVeterans(int customerAge)
+        {
+            var customer = CreateCustomer(customerAge, DateTime.Today.AddDays(-1));
+            customer.IsVeteran = true;
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.10m);
+        }
+
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
         {
             return new Customer

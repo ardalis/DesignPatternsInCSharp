@@ -10,6 +10,11 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             {
                 return .15m;
             }
+           
+            if(customer.IsVeteran)
+            {
+                return .10m;
+            }
 
             if(customer.DateOfBirth < DateTime.Now.AddYears(-65))
             {
