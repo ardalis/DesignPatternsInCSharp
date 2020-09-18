@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Google.Protobuf" Version="3.9.1" />
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.23.2" />
     <PackageReference Include="Grpc.Tools" Version="2.23.0">
