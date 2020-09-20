@@ -54,6 +54,23 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             result.Should().Be(.10m);
         }
 
+        [Theory]
+        [InlineData(1, .05)]
+        [InlineData(2, .08)]
+        [InlineData(5, .10)]
+        [InlineData(10, .12)]
+        [InlineData(15, .15)]
+        public void ReturnsCorrectLoyaltyDiscountForLongtimeCustomers(int yearsAsCustomer, decimal expectedDiscount)
+        {
+            var customer = CreateCustomer(DEFAULT_AGE, 
+                DateTime.Today.AddYears(-yearsAsCustomer).AddDays(-1));
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(expectedDiscount);
+        }
+
+
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
         {
             return new Customer
