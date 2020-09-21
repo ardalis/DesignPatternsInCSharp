@@ -70,6 +70,20 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             result.Should().Be(expectedDiscount);
         }
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void ReturnsVeteransDiscountForLoyal1And2YearCustomers(int yearsAsCustomer)
+        {
+            var customer = CreateCustomer(DEFAULT_AGE,
+                DateTime.Today.AddYears(-yearsAsCustomer).AddDays(-1));
+            customer.IsVeteran = true;
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.10m);
+        }
+
 
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
         {

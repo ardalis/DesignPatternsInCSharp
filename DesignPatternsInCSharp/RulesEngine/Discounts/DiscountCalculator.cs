@@ -24,11 +24,13 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
                 {
                     return .10m;
                 }
-                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-2))
+                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-2) &&
+                    !customer.IsVeteran)
                 {
                     return .08m;
                 }
-                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-1))
+                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-1) &&
+                    !customer.IsVeteran)
                 {
                     return .05m;
                 }
