@@ -62,8 +62,23 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
         [InlineData(15, .15)]
         public void ReturnsCorrectLoyaltyDiscountForLongtimeCustomers(int yearsAsCustomer, decimal expectedDiscount)
         {
-            var customer = CreateCustomer(DEFAULT_AGE, 
+            var customer = CreateCustomer(DEFAULT_AGE,
                 DateTime.Today.AddYears(-yearsAsCustomer).AddDays(-1));
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(expectedDiscount);
+        }
+
+        [Theory]
+        [InlineData(1, .15)]
+        [InlineData(2, .18)]
+        [InlineData(5, .20)]
+        [InlineData(10, .22)]
+        [InlineData(15, .25)]
+        public void ReturnsCorrectLoyaltyDiscountForLongtimeCustomersOnTheirBirthday(int yearsAsCustomer, decimal expectedDiscount)
+        {
+            var customer = CreateBirthdayCustomer(DEFAULT_AGE, DateTime.Today.AddYears(-yearsAsCustomer).AddDays(-1));
 
             var result = _calculator.CalculateDiscountPercentage(customer);
 
@@ -84,12 +99,44 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             result.Should().Be(.10m);
         }
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void ReturnsVeteransDiscountForLoyal1And2YearCustomersOnBirthday(int yearsAsCustomer)
+        {
+            var customer = CreateBirthdayCustomer(DEFAULT_AGE,
+                DateTime.Today.AddYears(-yearsAsCustomer).AddDays(-1));
+            customer.IsVeteran = true;
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.20m);
+        }
+
+        [Fact]
+        public void Returns10PctForCustomerSecondPurchaseOnBirthday()
+        {
+            var customer = CreateBirthdayCustomer(20, DateTime.Today.AddDays(-1));
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.10m);
+        }
 
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
         {
             return new Customer
             {
                 DateOfBirth = DateTime.Today.AddYears(-age).AddDays(-1),
+                DateOfFirstPurchase = firstPurchaseDate
+            };
+        }
+
+        private Customer CreateBirthdayCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
+        {
+            return new Customer
+            {
+                DateOfBirth = DateTime.Today.AddYears(-age),
                 DateOfFirstPurchase = firstPurchaseDate
             };
         }
