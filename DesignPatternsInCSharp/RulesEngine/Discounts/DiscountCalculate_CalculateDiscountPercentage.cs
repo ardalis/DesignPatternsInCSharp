@@ -84,6 +84,19 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             result.Should().Be(.10m);
         }
 
+        [Fact]
+        public void Returns10PctForCustomerSecondPurchaseOnBirthday()
+        {
+            var customer = new Customer
+            {
+                DateOfBirth = DateTime.Today.AddYears(-20),
+                DateOfFirstPurchase = DateTime.Today.AddDays(-1)
+            };
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.10m);
+        }
 
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
         {

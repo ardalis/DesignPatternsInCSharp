@@ -20,7 +20,8 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
                 {
                     return .12m;
                 }
-                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-5))
+                if (customer.DateOfFirstPurchase.Value < DateTime.Now.AddYears(-5) ||
+                    (customer.DateOfBirth.HasValue && customer.DateOfBirth.Value.Month == DateTime.Today.Month && customer.DateOfBirth.Value.Day == DateTime.Today.Day))
                 {
                     return .10m;
                 }
