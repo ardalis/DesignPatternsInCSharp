@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <None Remove="Adapter\People.json" />
+    <None Remove="RulesEngine\DiscountsShortCircuit\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="RulesEngine\DiscountsShortCircuit\README.md" />
   </ItemGroup>
 
   <ItemGroup>

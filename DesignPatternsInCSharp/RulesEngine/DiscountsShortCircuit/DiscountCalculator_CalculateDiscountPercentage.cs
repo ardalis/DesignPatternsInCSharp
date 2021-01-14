@@ -2,9 +2,9 @@
 using System;
 using Xunit;
 
-namespace DesignPatternsInCSharp.RulesEngine.Discounts
+namespace DesignPatternsInCSharp.RulesEngine.DiscountsShortCircuit
 {
-    public class DiscountCalculate_CalculateDiscountPercentage
+    public class DiscountCalculator_CalculateDiscountPercentage
     {
         private DiscountCalculator _calculator = new DiscountCalculator();
         const int DEFAULT_AGE = 30;
@@ -121,6 +121,17 @@ namespace DesignPatternsInCSharp.RulesEngine.Discounts
             var result = _calculator.CalculateDiscountPercentage(customer);
 
             result.Should().Be(.10m);
+        }
+
+        [Fact]
+        public void Returns30PctForCustomerFirstPurchaseWithReferrer()
+        {
+            var customer = CreateCustomer();
+            customer.Referrer = new ReferredBy(CreateCustomer());
+
+            var result = _calculator.CalculateDiscountPercentage(customer);
+
+            result.Should().Be(.30m);
         }
 
         private Customer CreateCustomer(int age = DEFAULT_AGE, DateTime? firstPurchaseDate = null)
